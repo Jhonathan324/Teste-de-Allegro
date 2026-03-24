@@ -10,8 +10,39 @@ void Trocar_Cena(int d){
     printf("%d\n",d);
 }
 
-bool colisao_retangulo(int x1, int y1, int largura1, int altura1,int x2,int y2, int largura2, int altura2){
-    if(x1 >= x2 && x1 <=x2 + largura2 && y1 >= y2 && y1<=y2+altura2) return 1; //verificado para um ponto do retangulo 1, falta 3.
+bool ColisaoRetangulo(RETANGULO *r1, RETANGULO *r2){
+    if(r1->x >= r2->x && r1->x <= r2->x + r2->largura && r1->y >= r2->y && r1->y <= r2->y+r2->altura) return 1;
+    else if(r1->x+r1->largura >= r2->x && r1->x+r1->largura <= r2->x + r2->largura && r1->y >= r2->y && r1->y <= r2->y+r2->altura) return 1;
+    else if(r1->x >= r2->x && r1->x <= r2->x + r2->largura && r1->y+r1->altura >= r2->y && r1->y+r1->altura <= r2->y+r2->altura) return 1;
+    else if(r1->x+r1->largura >= r2->x && r1->x+r1->largura <= r2->x + r2->largura && r1->y+r1->altura >= r2->y && r1->y+r1->altura <= r2->y+r2->altura) return 1;
+    else if(r2->x >= r1->x && r2->x <= r1->x + r1->largura && r2->y >= r1->y && r2->y <= r1->y+r1->altura) return 1;
+    else if(r2->x+r2->largura >= r1->x && r2->x+r2->largura <= r1->x + r1->largura && r2->y >= r1->y && r2->y <= r1->y+r1->altura) return 1;
+    else if(r2->x >= r1->x && r2->x <= r1->x + r1->largura && r2->y+r2->altura >= r1->y && r2->y+r2->altura <= r1->y+r1->altura) return 1;
+    else if(r2->x+r2->largura >= r1->x && r2->x+r2->largura <= r1->x + r1->largura && r2->y+r2->altura >= r1->y && r2->y+r2->altura <= r1->y+r1->altura) return 1;
+    else return 0;
+}
 
+bool DesenharRetangulo(RETANGULO *retangulo, int cor[3]){
+    al_draw_filled_rectangle(retangulo->x,
+                             retangulo->y,
+                             retangulo->x+retangulo->largura,
+                             retangulo->y+retangulo->altura,
+                             al_map_rgb(cor[0],cor[1],cor[2]));
+    return 0;
+}
 
+bool DesenharRetanguloPica(RETANGULO *retangulo,int borda, int cor[3]){
+    al_draw_filled_rounded_rectangle(retangulo->x,
+                             retangulo->y,
+                             retangulo->x+retangulo->largura,
+                             retangulo->y+retangulo->altura,
+                             borda,borda,
+                             al_map_rgb(cor[0],cor[1],cor[2]));
+
+    return 0;
+}
+
+bool ColisaoMouseRetangulo(ALLEGRO_MOUSE_STATE *mouse,RETANGULO *retangulo){
+    if(mouse->x >= retangulo->x && mouse->x <= retangulo->x + retangulo->largura && mouse->y >= retangulo->y && mouse->y <= retangulo->y+retangulo->altura) return 1;
+    else return 0;
 }

@@ -1,6 +1,9 @@
 #ifndef GERAIS_H_INCLUDED
 #define GERAIS_H_INCLUDED
 #include <stdbool.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 
 typedef enum{
     MENU_INICIL,
@@ -10,16 +13,21 @@ typedef enum{
     CREDITOS
 } Estado_jogo;
 
-void Trocar_Cena(int d);
-
-bool colisao_retangulo(int x1, int y1, int largura1, int altura1,int x2,int y2, int largura2, int altura2);
-
-
 typedef struct RETANGULO{
     int x, y;
     int largura, altura;
-    int cor[3];
 } RETANGULO;
+
+
+void Trocar_Cena(int d);
+
+bool ColisaoRetangulo(RETANGULO *retangulo1, RETANGULO *retangulo2);
+bool DesenharRetangulo(RETANGULO *retangulo, int cor[3]);
+bool DesenharRetanguloPica(RETANGULO *retangulo,int borda, int cor[3]);
+bool ColisaoMouseRetangulo(ALLEGRO_MOUSE_STATE *mouse, RETANGULO *retangulo);
+
+
+
 
 
 

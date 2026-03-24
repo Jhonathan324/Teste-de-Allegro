@@ -36,7 +36,9 @@ int main(){
 
     bool jogo_lop = true;
 
-    RETANGULO botao_menu = {20,20,20,20,{30,70,20}};
+    RETANGULO bloco1 = {20,20,20,20};
+    RETANGULO bloco2 = {50,50,20,20};
+    RETANGULO bloco3 = {80,80,40,40};
 
 
 
@@ -50,22 +52,26 @@ int main(){
             al_get_keyboard_state(&estado_teclado);
             al_get_mouse_state(&estado_mouse);
             if (al_key_down(&estado_teclado,ALLEGRO_KEY_ESCAPE)) jogo_lop =0;
-            if (al_key_down(&estado_teclado,ALLEGRO_KEY_RIGHT)) botao_menu.x += 1;
-            if (al_key_down(&estado_teclado,ALLEGRO_KEY_LEFT)) botao_menu.x -= 1;
-            if (al_key_down(&estado_teclado,ALLEGRO_KEY_UP)) botao_menu.y -= 1;
-            if (al_key_down(&estado_teclado,ALLEGRO_KEY_DOWN)) botao_menu.y += 1;
+            if (al_key_down(&estado_teclado,ALLEGRO_KEY_RIGHT)) bloco1.x += 1;
+            if (al_key_down(&estado_teclado,ALLEGRO_KEY_LEFT)) bloco1.x -= 1;
+            if (al_key_down(&estado_teclado,ALLEGRO_KEY_UP)) bloco1.y -= 1;
+            if (al_key_down(&estado_teclado,ALLEGRO_KEY_DOWN)) bloco1.y += 1;
 
-            al_clear_to_color(al_map_rgb(20,20,100));
+            al_clear_to_color(al_map_rgb(100,100,255));
 
-            for(int i = 0; i<5; i++){
-                al_draw_filled_rectangle(botao_menu.x + i*(botao_menu.largura+20),
-                                        botao_menu.y,
-                                        botao_menu.x+botao_menu.largura + i*(botao_menu.largura+20),
-                                        botao_menu.y+botao_menu.altura,
-                                        al_map_rgb(botao_menu.cor[0],
-                                                botao_menu.cor[1],
-                                                botao_menu.cor[2]));
+            {
+                int cor1[3] = {20,20,20}, cor2[3] = {50,50,50}, cor3[3] = {200,50,50};
+
+                DesenharRetangulo(&bloco1,cor1);
+                DesenharRetangulo(&bloco2,cor2);
+                DesenharRetanguloPica(&bloco3,10,cor3);
+
             }
+
+
+
+            if(ColisaoRetangulo(&bloco1,&bloco2)) printf("bananinha");
+
 
             al_draw_filled_rectangle(estado_mouse.x - 10,
                                      estado_mouse.y - 10,
@@ -73,6 +79,7 @@ int main(){
                                      estado_mouse.y + 10,
                                      al_mouse_button_down(&estado_mouse, 1) ? al_map_rgb(0,0,0) :al_map_rgb(255,255,255));
 
+            if(al_mouse_button_down(&estado_mouse,1)) if (ColisaoMouseRetangulo(&estado_mouse,&bloco3)) printf("Porra!");
 
 
 

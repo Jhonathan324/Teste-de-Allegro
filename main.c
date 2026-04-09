@@ -18,9 +18,12 @@ int main(){
     al_init();
     al_install_mouse();
     al_install_keyboard();
+
     al_init_primitives_addon();
 
-    ALLEGRO_DISPLAY *display = al_create_display(800, 600);
+    int tam_tela[2] = {800,600};
+
+    ALLEGRO_DISPLAY *display = al_create_display(tam_tela[0], tam_tela[1]);
     ALLEGRO_TIMER *timer = al_create_timer(1.0/60);
     ALLEGRO_EVENT_QUEUE *fila = al_create_event_queue();
     ALLEGRO_KEYBOARD_STATE estado_teclado;
@@ -36,13 +39,18 @@ int main(){
 
     bool jogo_lop = true;
 
+    CAMERA camera = {0,0};
+
     RETANGULO bloco1 = {20,20,20,20};
     RETANGULO bloco2 = {50,50,20,20};
     RETANGULO bloco3 = {80,80,40,40};
 
 
 
+
     al_start_timer(timer);
+
+    al_hide_mouse_cursor(display);
 
     while(jogo_lop){
         al_wait_for_event(fila, &evento_atual);
@@ -57,29 +65,34 @@ int main(){
             if (al_key_down(&estado_teclado,ALLEGRO_KEY_UP)) bloco1.y -= 1;
             if (al_key_down(&estado_teclado,ALLEGRO_KEY_DOWN)) bloco1.y += 1;
 
+
+
+
+            camera.x = -bloco1.x + tam_tela[0]/2;
+            camera.y = -bloco1.y + tam_tela[1]/2;
+
             al_clear_to_color(al_map_rgb(100,100,255));
+
+            DesenharTiles(tam_tela,40,camera);
 
             {
                 int cor1[3] = {20,20,20}, cor2[3] = {50,50,50}, cor3[3] = {200,50,50};
 
-                DesenharRetangulo(&bloco1,cor1);
-                DesenharRetangulo(&bloco2,cor2);
-                DesenharRetanguloPica(&bloco3,10,cor3);
+                DesenharRetangulo(bloco1,cor1,camera);
+                DesenharRetangulo(bloco2,cor2,camera);
+                DesenharRetanguloPica(bloco3,10,cor3,camera);
 
             }
 
 
 
-            if(ColisaoRetangulo(&bloco1,&bloco2)) printf("bananinha");
+            if(ColisaoRetangulo(bloco1,bloco2)) printf("bananinha");
 
+            RETANGULO retangulo_mouse = {estado_mouse.x , estado_mouse.y , 20, 20};
 
-            al_draw_filled_rectangle(estado_mouse.x - 10,
-                                     estado_mouse.y - 10,
-                                     estado_mouse.x + 10,
-                                     estado_mouse.y + 10,
-                                     al_mouse_button_down(&estado_mouse, 1) ? al_map_rgb(0,0,0) :al_map_rgb(255,255,255));
+            DesenharRetangulo(retangulo_mouse, al_mouse_button_down(&estado_mouse, 1) ? (int[3]){0,0,0} : (int[3]){255,255,255} , (CAMERA){0,0});
 
-            if(al_mouse_button_down(&estado_mouse,1)) if (ColisaoMouseRetangulo(&estado_mouse,&bloco3)) printf("Porra!");
+            if(al_mouse_button_down(&estado_mouse,1)) if (ColisaoMouseRetangulo(estado_mouse,bloco3,camera)) printf("Porra!");
 
 
 

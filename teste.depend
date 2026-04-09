@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1775756225 source:c:\users\17898981\projetos\teste\main.c
+	"gerais.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+
+1775756272 source:c:\users\17898981\projetos\teste\gerais.c
+	"gerais.h"
+	<stdio.h>
+	<stdlib.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+
+1775756060 c:\users\17898981\projetos\teste\gerais.h
+	<stdbool.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+	<allegro5/allegro_image.h>
+

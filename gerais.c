@@ -8,6 +8,7 @@
 
 void Trocar_Cena(int d){
     printf("%d\n",d);
+    return;
 }
 
 bool ColisaoRetangulo(RETANGULO r1, RETANGULO r2){
@@ -35,14 +36,29 @@ void DesenharRetangulo(RETANGULO retangulo, int cor[3], CAMERA camera){
                              al_map_rgb(cor[0],cor[1],cor[2]));
 }
 
-void DesenharRetanguloPica(RETANGULO retangulo,int borda, int cor[3], CAMERA camera){
+void DesenharRetanguloPica(RETANGULO_PICA retangulo, CAMERA camera){
     al_draw_filled_rounded_rectangle(retangulo.x + camera.x,
                                      retangulo.y + camera.y,
                                      retangulo.x+retangulo.largura + camera.x,
                                      retangulo.y+retangulo.altura  + camera.y,
-                                     borda,borda,
-                                     al_map_rgb(cor[0],cor[1],cor[2]));
+                                     retangulo.borda,retangulo.borda,
+                                     al_map_rgb(retangulo.cor[0],retangulo.cor[1],retangulo.cor[2]));
 }
+
+
+
+// Funções de Menu
+
+bool DesenharBotao(RETANGULO retangulo,int borda, int cor[3], CAMERA camera);
+
+
+
+
+
+
+
+//Funções de Jogo
+
 
 void DesenharTiles(int tela[2], int tamanho, CAMERA camera){
     for(int i = 0; i*tamanho < tela[0];i++){
@@ -50,12 +66,8 @@ void DesenharTiles(int tela[2], int tamanho, CAMERA camera){
             RETANGULO bloco = {i*tamanho,j*tamanho,tamanho,tamanho};
             if((j+i)%2)DesenharRetangulo(bloco,(int[3]){255,255,255}, camera);
             else DesenharRetangulo(bloco, (int[3]){230,230,230}, camera);
-
-
-
         }
     }
-
 
 }
 

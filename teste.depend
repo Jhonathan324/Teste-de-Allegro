@@ -22,7 +22,7 @@
 	<allegro5/allegro_primitives.h>
 	<allegro5/allegro_image.h>
 
-1776167165 source:c:\users\17898981\projetos\teste-de-allegro\gerais.c
+1776209810 source:c:\users\17898981\projetos\teste-de-allegro\gerais.c
 	"gerais.h"
 	<stdio.h>
 	<stdlib.h>
@@ -30,13 +30,13 @@
 	<allegro5/allegro_primitives.h>
 	<allegro5/allegro_image.h>
 
-1776167165 c:\users\17898981\projetos\teste-de-allegro\gerais.h
+1776209672 c:\users\17898981\projetos\teste-de-allegro\gerais.h
 	<stdbool.h>
 	<allegro5/allegro.h>
 	<allegro5/allegro_primitives.h>
 	<allegro5/allegro_image.h>
 
-1776167165 source:c:\users\17898981\projetos\teste-de-allegro\main.c
+1776209684 source:c:\users\17898981\projetos\teste-de-allegro\main.c
 	"gerais.h"
 	<stdio.h>
 	<stdlib.h>

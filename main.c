@@ -8,12 +8,6 @@
 
 
 
-
-
-
-
-
-
 int main(){
     al_init();
     al_install_mouse();
@@ -43,7 +37,7 @@ int main(){
 
     RETANGULO bloco1 = {20,20,20,20};
     RETANGULO bloco2 = {50,50,20,20};
-    RETANGULO bloco3 = {80,80,40,40};
+    RETANGULO_PICA bloco3 = {80,80,40,40,(int){100,100,100}, 20};
 
 
 
@@ -80,7 +74,7 @@ int main(){
 
                 DesenharRetangulo(bloco1,cor1,camera);
                 DesenharRetangulo(bloco2,cor2,camera);
-                DesenharRetanguloPica(bloco3,10,cor3,camera);
+                DesenharRetanguloPica(bloco3,camera);
 
             }
 
@@ -92,7 +86,7 @@ int main(){
 
             DesenharRetangulo(retangulo_mouse, al_mouse_button_down(&estado_mouse, 1) ? (int[3]){0,0,0} : (int[3]){255,255,255} , (CAMERA){0,0});
 
-            if(al_mouse_button_down(&estado_mouse,1)) if (ColisaoMouseRetangulo(estado_mouse,bloco3,camera)) printf("Porra!");
+            if(al_mouse_button_down(&estado_mouse,1)) if (ColisaoMouseRetangulo(estado_mouse,bloco2,camera)) printf("Porra!");
 
 
 
